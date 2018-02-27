@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+    Create a new company
+{% endblock %}
+
+{% block content %}
+    <h1>
+        New company
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url "developerHome" %}">Developers</a></li>
+        <li class="active">New company</li>
+    </ol>
+    {% crispy form %}
+
+{% endblock %}

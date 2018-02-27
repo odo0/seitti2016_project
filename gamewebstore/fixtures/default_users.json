@@ -1,0 +1,38 @@
+[
+  {
+    "fields": {
+      "user_permissions": [],
+      "username": "admin",
+      "first_name": "",
+      "email": "admin@example.org",
+      "password": "pbkdf2_sha256$20000$XXvXClLuSybF$Qp8+UHQZhqrnow5t40a/Nvv6D2Uyziv+9QBF9KSVqJU=",
+      "date_joined": "2016-05-08T13:48:10.022Z",
+      "last_login": "2016-05-08T13:48:22.042Z",
+      "is_superuser": true,
+      "is_staff": true,
+      "last_name": "",
+      "groups": [],
+      "is_active": true
+    },
+    "model": "auth.user",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "user_permissions": [],
+      "username": "aegames",
+      "first_name": "",
+      "email": "aegames@example.org",
+      "password": "pbkdf2_sha256$20000$vjwst1PJSGGX$cOpRFf1zeZYTRByn7DDcInjbScW4LuNHDlGkJjIJevs=",
+      "date_joined": "2016-05-08T13:50:16.160Z",
+      "last_login": "2016-05-08T13:50:30.238Z",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_name": "",
+      "groups": [],
+      "is_active": true
+    },
+    "model": "auth.user",
+    "pk": 2
+  }
+]

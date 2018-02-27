@@ -1,0 +1,13 @@
+{% load to_currency %}
+<h3><a class="gamecard-title" href="{% url "marketplaceGameEntry" game_id=game.id %}">{{ game.name }}</a></h3>
+<div class="gamecard-description">
+    {{ game.description | linebreaks | truncatewords_html:25 }}
+</div>
+{% if game.id in owned_games %}
+    <a class="btn btn-default" href="{% url "playGame" game_id=game.id %}">Play game</a>
+    {% if game.company in request.user.companies.all %}
+        <a class="btn btn-default" href="{% url "developerGame" dev_id=game.company.id game_id=game.id %}">Edit game</a>
+    {% endif %}
+{% else %}
+    <a class="btn btn-default" href="{% url "marketplaceGamePurchase" game_id=game.id %}">Buy game ({{ game.price | to_currency }}€)</a>
+{% endif %}

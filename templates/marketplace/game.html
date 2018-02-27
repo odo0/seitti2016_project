@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load to_currency %}
+{% load staticfiles %}
+{% block head_title %}
+    {{ game.name }}
+{% endblock %}
+{% block additional_head %}
+    <meta property="og:title" content="Get {{ game.name | escape }} on FOG!" />
+    <meta property="og:description" content="{{ game.description | escape}}" />
+    <meta property="og:image" content="http://{{ request.get_host }}{% static "img/fog_black.png" %}" />
+    <meta property="og:site_name" content="FOG" />
+{% endblock %}
+
+{% block content %}
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=1053459051393124";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+    <h1>{{ game.name }}</h1>
+
+    {% if game.id in owned_games %}
+        <a class="btn btn-default" href="{% url "playGame" game_id=game.id %}">Play game</a>
+        {% if game.company in request.user.companies.all %}
+            <a class="btn btn-default" href="{% url "developerGame" dev_id=game.company.id game_id=game.id %}">Edit game</a>
+        {% endif %}
+    {% else %}
+        <a class="btn btn-default" href="{% url "marketplaceGamePurchase" game_id=game.id %}">Buy game ({{ game.price | to_currency }}€)</a>
+    {% endif %}
+
+    <div class="col-xs-12">
+        <dl class="dl-horizontal">
+            <dt>Categories</dt>
+            <dd>
+                {% for category in game.categories.all %}
+                    {{ category.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </dd>
+            <dt>Price</dt>
+            <dd>
+                {{ game.price | to_currency }} €
+            </dd>
+            <dt>Description</dt>
+            <dd>
+                {{ game.description | linebreaks }}
+            </dd>
+            <dt>Developed by</dt>
+            <dd>
+                {{ game.company.name }}
+                <a href="{% url "marketplaceCompanyGamesListing" dev_id=game.company.id %}">(More games by this developer)</a>
+            </dd>
+        </dl>
+    </div>
+    <div class="fb-share-button" data-href="{{ request.get_full_path }}" data-layout="button" data-mobile-iframe="true"></div>
+
+{% endblock %}

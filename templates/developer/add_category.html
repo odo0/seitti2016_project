@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+    Create a new category
+{% endblock %}
+
+{% block content %}
+
+    <ol class="breadcrumb">
+        <li class="active">New category</li>
+    </ol>
+    {% crispy form %}
+
+{% endblock %}

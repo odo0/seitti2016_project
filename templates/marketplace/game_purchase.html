@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load to_currency %}
+{% block head_title %}
+    Confirm purchase of {{ game.name }}
+{% endblock %}
+
+{% block content %}
+    <h1>
+        Confirm purchase of {{ game.name }}
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url "marketplaceHome" %}">Marketplace</a></li>
+        <li><a href="{% url "marketplaceGameEntry" game_id=game.id %}">{{ game.name }}</a></li>
+        <li class="active">Purchase</li>
+    </ol>
+    <p>
+        Please verify the details below to proceed with your purchase of access to <strong>{{ game.name }}</strong>.
+        Once you click "Purchase", you will be redirected to our payment processor partner Simple Payments.
+    </p>
+    <dl class="dl-horizontal">
+        <dt>User</dt>
+        <dd>{{ request.user.username }}</dd>
+        <dt>Game</dt>
+        <dd>{{ game.name }}</dd>
+        <dt>Price</dt>
+        <dd>{{ game.price | to_currency }} €</dd>
+    </dl>
+    <form method="post" action="https://simplepayments.herokuapp.com/pay/" class="text-align-center">
+        <input type="hidden" name="pid" value="{{ pid }}">
+        <input type="hidden" name="sid" value="{{ sid }}">
+        <input type="hidden" name="amount" value="{{ game.price }}">
+        <input type="hidden" name="success_url" value="//{{ request.get_host }}{% url "transactionsConfirm" %}">
+        <input type="hidden" name="cancel_url" value="//{{ request.get_host }}{% url "transactionsCancel" %}">
+        <input type="hidden" name="error_url" value="//{{ request.get_host }}{% url "transactionsError" %}">
+        <input type="hidden" name="checksum" value="{{ checksum }}">
+        <button class="btn btn-success">Confirm</button>
+        <a class="btn btn-default" href="{% url "marketplaceGameEntry" game_id=game.id %}">Cancel</a>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load to_currency %}
+{% block head_title %}
+    Games by {{ company.name }}
+{% endblock %}
+
+{% block content %}
+    <h1>Games by {{ company.name }}</h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url "home" %}">Home</a></li>
+        <li>Developers</li>
+        <li class="active">{{ company.name }}</li>
+    </ol>
+    <div class="row">
+        {% for game in company.games.all %}
+            {% if game.active %}
+                {% include "marketplace/game_card.html" %}
+            {% endif %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

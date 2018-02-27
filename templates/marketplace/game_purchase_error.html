@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load to_currency %}
+{% block head_title %}
+    Error while purchasing {{ game.name }}
+{% endblock %}
+
+{% block content %}
+    <h1>
+        Error while purchasing {{ game.name }}
+    </h1>
+    <p>
+        The payment processor reported an error, so the transaction has been cancelled. Please wait for a moment
+        before trying again.
+    </p>
+    <a class="btn btn-default" href="{% url "marketplaceGameEntry" game_id=game.id %}">Go back to marketplace page</a>
+
+{% endblock %}

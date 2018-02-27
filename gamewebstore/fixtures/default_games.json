@@ -1,0 +1,17 @@
+[
+  {
+    "pk": 1,
+    "fields": {
+      "url": "http://seitti2016-fogstore.herokuapp.com/misc/example_game.html",
+      "categories": [
+        2
+      ],
+      "name": "Stones and Backpacks",
+      "active": true,
+      "company": 1,
+      "description": "An easy game",
+      "price": "0.50"
+    },
+    "model": "gamewebstore.onlinegame"
+  }
+]

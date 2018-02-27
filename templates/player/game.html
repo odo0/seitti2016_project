@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block head_title %}
+    {{ game.name }}
+{% endblock %}
+
+{% block content %}
+    <h1>
+        {{ game.name }}
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url "home" %}">Home</a></li>
+        <li><a href="{% url "libraryHome" %}">Library</a></li>
+        <li class="active">{{ game.name }}</li>
+    </ol>
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <iframe src="{{ game.url }}" id="game_player_frame"></iframe>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <h3>Top scores</h3>
+            <ol class="list-group">
+                {% for score in scores %}
+                    <li class="list-group-item">
+                        #{{ forloop.counter }} {{ score.user.username }}
+                        <span class="pull-right">{{ score.score }}</span>
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+        'use strict';
+        window.FOG = (window.FOG === undefined) ? {} : window.FOG;
+        window.FOG.SERVICE_PATHS = Object.freeze({
+            DATA_LOAD: "{% url "playApiLoadSavedData" game_id=game.id %}",
+            DATA_SAVE: "{% url "playApiSaveData" game_id=game.id %}",
+            SCORE_SAVE: "{% url "playApiSaveScore" game_id=game.id %}"
+        });
+    </script>
+    <script src="{% static 'js/game-message-arbiter.js' %}"></script>
+{% endblock %}

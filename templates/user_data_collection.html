@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class='row'>
+<div class='col-sm-6 col-sm-offset-3'>
+<h1>User data collection</h1>
+
+    <p class='lead'>{% trans "Next, you need to fill this form:" %}</p>
+<form method="post" action=".">
+  {% csrf_token %}
+  {{ form|crispy }}
+
+  <input class='btn btn-block btn-primary' type="submit" value="{% trans 'Submit' %}" />
+  <input type="hidden" name="next" value="{% url 'home' %}" />
+</form>
+</div>
+
+</div>
+<hr/>
+
+
+{% endblock %}

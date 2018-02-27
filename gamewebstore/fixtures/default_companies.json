@@ -1,0 +1,12 @@
+[
+  {
+    "pk": 1,
+    "fields": {
+      "name": "AE Games",
+      "user": [
+        2
+      ]
+    },
+    "model": "gamewebstore.company"
+  }
+]

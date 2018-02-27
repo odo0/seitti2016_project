@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load to_currency %}
+{% block head_title %}
+    {{ category.name }} Games
+{% endblock %}
+
+{% block content %}
+    <h1>{{ category.name }}</h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url "home" %}">Home</a></li>
+        <li class="active">{{ category.name }}</li>
+    </ol>
+    <div class="row">
+        {% for game in category.games.all %}
+            {% if game.active %}
+                {% include "marketplace/game_card.html" %}
+            {% endif %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

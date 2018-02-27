@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load to_currency %}
+{% block head_title %}
+    Thank you for purchasing {{ game.name }}!
+{% endblock %}
+
+{% block content %}
+    <h1>
+        Thank you for purchasing {{ game.name }}!
+    </h1>
+    <p>
+        You can now play the game from either the marketplace page or directly from your library.
+    </p>
+    <a class="btn btn-default" href="{% url "marketplaceGameEntry" game_id=game.id %}">Go back to marketplace page</a>
+    <a class="btn btn-default" href="{% url "libraryHome" %}">Go to library</a>
+
+{% endblock %}

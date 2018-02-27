@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+{% block head_title %}Front Page{% endblock %}
+
+<style>
+{% block style %}
+.navbar-static-top {
+	margin-bottom: 0px !important;
+}
+
+{% endblock %}
+</style>
+
+
+{% block content %}
+ {% if request.user.is_authenticated %}
+<h1>You are logged in!</h1>
+ <h2>{{ admin }} </h2>
+
+<h3>{{role}}</h3>
+
+
+{% endif %}
+
+{% endblock %}

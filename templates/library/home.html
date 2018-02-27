@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block head_title %}
+    My Game Library
+{% endblock %}
+
+{% block content %}
+    <h1>
+        Library
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url "home" %}">Home</a></li>
+        <li class="active">Library</li>
+    </ol>
+    <div class="row">
+        <ul class="list-group">
+            {% for game in purchased_games %}
+                <li class="list-group-item">
+                    <div class="list-group-item-heading">
+                        <h3>{{ game.game.name }}
+                            <div class="pull-right">
+                                <a class="btn btn-default" href="{% url "playGame" game_id=game.game.id %}">Play game</a>
+                            </div>
+                        </h3>
+                    </div>
+                    <div>
+                        <dl class="dl-horizontal">
+                            <dt>Purchased on</dt>
+                            <dd>{{ game.purchase_date }}</dd>
+                        </dl>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

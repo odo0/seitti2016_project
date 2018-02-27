@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block head_title %}
+    Marketplace
+{% endblock %}
+
+{% block content %}
+    <h1>
+        FOG
+    </h1>
+    <div class="jumbotron">
+        <p>Welcome to FOG, the premier marketplace for browser-based games!</p>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <h2>Browse by category</h2>
+
+        <ul class="list-group">
+            {% for category in categories %}
+                <li class="list-group-item">
+                    <a href="{% url "marketplaceCategoryListing" category_id=category.id %}">{{ category.name }}</a>
+                    <span class="pull-right badge">
+                        {{ category.active_games_count | default_if_none:0 }}
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <h2>Random game picks</h2>
+
+        <div class="row">
+            {% for game in random_picks %}
+                {% include "marketplace/game_card_wide.html" %}
+            {% endfor %}
+        </div>
+
+        <h2>Popular games</h2>
+
+        <div class="row">
+            {% for game in popular_games %}
+                {% include "marketplace/game_card_wide.html" %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

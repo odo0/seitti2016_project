@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load to_currency %}
+{% block head_title %}
+    {{ company.name }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ company.name }}
+        <div class="pull-right">
+            <a class="btn btn-default" href="{% url 'developerGameAdd' dev_id=company.id %}">
+                <i class="fa fa-plus"></i> New Game
+            </a>
+            <a class="btn btn-danger" href="{% url 'developerCompanyDelete' dev_id=company.id %}">
+                <i class="fa fa-remove"></i> Delete
+            </a>
+        </div>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url "developerHome" %}">Developers</a></li>
+        <li class="active">{{ company.name }}</li>
+    </ol>
+    <h2>Games</h2>
+    <div class="col-xs-12">
+        <ul class="list-group">
+            {% for game in company.games.all %}
+                <li class="list-group-item
+                {% if not game.active %}
+                    list-group-item-danger
+                {% endif %}
+                ">
+                    <a href="{% url "developerGame" dev_id=company.id game_id=game.id %}">{{ game.name }}</a>
+                    <span class="pull-right"><i class="fa fa-eur"></i> {{ game.price | to_currency }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

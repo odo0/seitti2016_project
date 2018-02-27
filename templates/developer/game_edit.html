@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+    {% if isNewGame %}
+        Add a new game
+    {% else %}
+        Editing {{ game.name }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>
+        {% if isNewGame %}
+            New Game
+        {% else %}
+            Editing {{ game.name }}
+        {% endif %}
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url "developerHome" %}">Developers</a></li>
+        <li><a href="{% url "developerCompany" dev_id=company.id %}">{{ company.name }}</a></li>
+        {% if isNewGame %}
+            <li class="active">New game</li>
+        {% else %}
+            <li><a href="{% url "developerGame" dev_id=company.id game_id=game.id %}">{{ game.name }}</a></li>
+            <li class="active">Edit</li>
+        {% endif %}
+    </ol>
+    {% crispy form %}
+    <a class="pull-right btn btn-primary" href="{% url 'developerCategoryAdd' dev_id=company.id %}">Add a new category</a>
+
+{% endblock %}
