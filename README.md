@@ -4,9 +4,9 @@ TIE-23500 Web-ohjelmointi
 
 Ryhmän jäsenet:
 
-* Osku Haavisto, 229440
-* Tomi Mäkelä, 208990
-* Mette Rahunen, 211374
+* Osku Haavisto
+* Tomi Mäkelä
+* Mette Rahunen
 
 Tarkoituksena olisi toteuttaa kaikki työohjeessa annetut ominaisuudet sekä lisäksi toteuttaa pelien arvostelu viiden tähden systeemillä.
 * Tunnistautuminen: Kirjautuminen tehdään sähköpostin avulla ja lisäksi kolmannen osapuolen tunnistautuminen hoidetaan Django - Social Registarion palikan avulla.
